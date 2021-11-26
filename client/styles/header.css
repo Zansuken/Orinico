@@ -1,0 +1,23 @@
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 1em;
+    background: rgb(56, 19, 156);
+}
+
+header div {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+header span {
+    font-size: xxx-large;
+    font-weight: 700;
+    color: white;
+}
+header span:last-child {
+    transform: rotateX(180deg) translateY(20px);
+    opacity: 0.3;
+}

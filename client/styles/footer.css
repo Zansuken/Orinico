@@ -1,0 +1,16 @@
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+    font-size: smaller;
+    background-color: white;
+}
+
+footer span {
+    border-top: 1px solid black;
+    width: 50%;
+    text-align: center;
+    padding: 1em 0;
+}
