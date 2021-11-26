@@ -5,32 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orinoco | Home page</title>
-    <link rel="stylesheet" href="./tailwind.css">
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
 
     <header>
-        <img src="./images/Logo_Orinoco.png" alt="Orinoco's logo">
-        <button></button>
+        <div>
+            <span>Orinoco</span>
+            <span>Orinoco</span>
+        </div>
     </header>
 
     <nav>
         <ul>
-            <li><a>Home</a></li>
-            <li><a>Our cameras</a></li>
-            <li><a>Our furnitures</a></li>
-            <li><a>Our teddies</a></li>
+            <li><a  href="index.html">Home</a></li>
+            <li>|</li>
+            <li><a id="cartButton" href="cart.html"><img src="images/cart.svg" alt="cart icon"></a>
+            </li>
         </ul>
     </nav>
 
     <main>
-        
+        <article id="productsView"></article>
     </main>
 
     <footer>
-
+        <span>Orinoco © 2021 | All rights reserved</span>
     </footer>
 
-    <script src="index.js"></script>
+    <script src="./javascript/index.js"></script>
 </body>
 </html>
