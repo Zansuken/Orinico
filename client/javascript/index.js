@@ -14,21 +14,20 @@ fetch("http://localhost:3000/api/cameras")
         }
     }
     
-    for (const iterator of value) {
+    for (const card of value) {
 
-        const test = new Card(iterator.name, iterator.imageUrl, iterator.description, iterator.price)
         const newDiv = document.createElement('div')
-        const newImg = document.createElement('img')
-        const newName = document.createElement('span')
-        const newDescription = document.createElement('p')
-        const newPrice = document.createElement('span')
-
-        newImg.setAttribute('src', iterator.imageUrl)
-        newName.innerHTML = "MODEL: " + test.name
-        newDescription.innerHTML = "SPECS: " + test.description
-        newPrice.innerHTML = "FOR: " + test.price + " €"
+        newDiv.innerHTML = `
+        <div class="card">
+            <img src="${card.imageUrl}" alt="camera">
+            <div class="details">
+                <h2>${card.name}</h2>
+                <p>${card.description}</p>
+                <span>${card.price}</span>
+            </div>
+        </div>
+        `
         layout.append(newDiv)
-        newDiv.append(newImg, newName, newDescription, newPrice)
     }
 
 })
