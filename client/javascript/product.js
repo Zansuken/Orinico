@@ -1,4 +1,4 @@
-const layout = document.querySelector("#cartView")
+const layout = document.querySelector("#product_view")
 
 const camerasUrl = 'http://localhost:3000/api/cameras'
 
@@ -16,7 +16,7 @@ allCameras.then(async function(response) {
     
     let url = window.location.search
     url = url.substring(5, url.length)
-    console.log(url);
+    console.log(value);
 
     
     
@@ -30,17 +30,21 @@ allCameras.then(async function(response) {
             
             const newDiv = document.createElement('div')
             let itemPrice = convertPrice(card.price)
+            
 
             newDiv.innerHTML = `
-            <div class="card">
+            <div class="card_product">
                 
                     <img src="${card.imageUrl}" alt="camera">
-                    <div class="details">
+                    <div class="details_products">
                         <div class="description_head">
                             <h2>${card.name}</h2>
                             <span>${itemPrice}</span>
                         </div>
                         <p>${card.description}</p>
+                        <select name="lenses" id="lenses_selection">
+                            ${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}
+                        </select>
                     </div>
                 
             </div>
