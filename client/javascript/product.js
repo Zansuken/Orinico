@@ -1,38 +1,29 @@
 const layout = document.querySelector("#product_view")
 
-const camerasUrl = 'http://localhost:3000/api/cameras'
-
-
-const allCameras = fetch(camerasUrl);
-
-allCameras.then(async function(response) {
-    if (response.ok) {
-        return response.json()
-    } else {
-        console.log('c\'est pas ok');
-    }
-})
+fetch("http://localhost:3000/api/cameras")
+.then(response => response.json())
 .then(async function(value) {
-    
-    let url = window.location.search
-    url = url.substring(5, url.length)
-    console.log(value);
 
-    
-    
-    for (const card of value) {
-        if (card._id === url) {
-            function convertPrice() {
-                let price = `${card.price}`
-                price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'}).format( price / 100 )
-                return price
-            }
-            
-            const newDiv = document.createElement('div')
-            let itemPrice = convertPrice(card.price)
-            
+        let url = window.location.search
+        url = url.substring(5, url.length)
+        console.log(value);
 
-            newDiv.innerHTML = `
+
+
+        for (const card of value) {
+            if (card._id === url) {
+                document.title = "Orinoco | " + card.name
+                function convertPrice() {
+                    let price = `${card.price}`
+                    price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price / 100)
+                    return price
+                }
+
+                const newDiv = document.createElement('div')
+                let itemPrice = convertPrice(card.price)
+
+
+                newDiv.innerHTML = `
             <div class="card_product">
                 
                     <img src="${card.imageUrl}" alt="camera">
@@ -55,11 +46,11 @@ allCameras.then(async function(response) {
                 
             </div>
             `
-            layout.append(newDiv)
+                layout.append(newDiv)
+            }
         }
-    }
 
-})
-.catch(function(error) {
-    console.log('Vraiment, ça va pas...' + error.message);
-})
+    })
+    .catch(function (error) {
+        console.log('Vraiment, ça va pas...' + error.message);
+    })

@@ -1,0 +1,111 @@
+.cart_list {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+}
+
+.cart_list ul {
+    width: 80%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.cart_list li {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px #000000;
+    border: 2px solid rgb(56, 19, 156);
+
+}
+
+.cart_list li img {
+    max-width: 200px;
+    margin: -2px;
+}
+
+.item_image {
+    object-position: center;
+    object-fit: cover;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.cart_list li button {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    transition: ease-in-out 0.3s;
+}
+
+.item_details, .item_side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.item_details {
+    gap: 1em;
+}
+
+.item_side {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+@keyframes buttons_animation {
+    0% {
+        transform: rotate(0) translateY(0);
+    }
+    33% {
+        transform: rotate(15deg)  translateY(-3px);
+    }
+    66% {
+        transform: rotate(-15deg)  translateY(-3px);
+    }
+    100% {
+        transform: rotate(0) translateY(0);
+    }
+}
+
+.item_buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item_buttons button:hover {
+    animation: ease-in-out;
+    animation-name: buttons_animation;
+    animation-duration: 0.5s;
+}
+
+#selected_item_total {
+    font-size: x-large;
+    font-weight: 700;
+}
+
+
+
+@media (max-width: 720px) {
+    .cart_list li {
+        flex-direction: column;
+    }
+    .cart_list li img {
+        max-width: calc(100% + 4px);
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .item_side {
+        flex-direction: row-reverse;
+    }
+}
