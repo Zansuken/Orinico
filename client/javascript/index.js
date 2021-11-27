@@ -5,26 +5,28 @@ fetch("http://localhost:3000/api/cameras")
     console.log(value);
     const layout = document.querySelector("article");
     
-    const Card = class {
-        constructor(name, image, description, price) {
-            this.name = name
-            this.image = image
-            this.description = description
-            this.price = price
-        }
-    }
-    
     for (const card of value) {
 
         const newDiv = document.createElement('div')
+        function convertPrice() {
+            let price = `${card.price}`
+            price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'}).format( price / 100 )
+            return price
+        }
+        let itemPrice = convertPrice(`${card.price}`);
+        let itemProductPage = card._id
         newDiv.innerHTML = `
         <div class="card">
-            <img src="${card.imageUrl}" alt="camera">
-            <div class="details">
-                <h2>${card.name}</h2>
-                <p>${card.description}</p>
-                <span>${card.price}</span>
-            </div>
+            <a href="/client/products.html?_id=${itemProductPage}">
+                <img src="${card.imageUrl}" alt="camera">
+                <div class="details">
+                    <div class="description_head">
+                        <h2>${card.name}</h2>
+                        <span>${itemPrice}</span>
+                    </div>
+                    <p>${card.description}</p>
+                </div>
+            </a>
         </div>
         `
         layout.append(newDiv)

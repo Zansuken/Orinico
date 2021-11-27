@@ -1,4 +1,4 @@
-const layout = document.querySelector("article")
+const layout = document.querySelector("#cartView")
 
 const camerasUrl = 'http://localhost:3000/api/cameras'
 
@@ -13,18 +13,42 @@ allCameras.then(async function(response) {
     }
 })
 .then(async function(value) {
-    const newImg = document.createElement("img")
-    const newName = document.createElement("span")
-    const newDescription = document.createElement("p")
-    const newPrice = document.createElement("span")
-    console.log(value);
+    
+    let url = window.location.search
+    url = url.substring(5, url.length)
+    console.log(url);
 
-    newImg.setAttribute("src", value[0].imageUrl)
-    newName.innerHTML = value[0].name
-    newDescription.innerHTML = value[0].description
-    newPrice.innerHTML = value[0].price
+    
+    
+    for (const card of value) {
+        if (card._id === url) {
+            function convertPrice() {
+                let price = `${card.price}`
+                price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'}).format( price / 100 )
+                return price
+            }
+            
+            const newDiv = document.createElement('div')
+            let itemPrice = convertPrice(card.price)
 
-    layout.append(newImg, newName, newDescription, newPrice)
+            newDiv.innerHTML = `
+            <div class="card">
+                
+                    <img src="${card.imageUrl}" alt="camera">
+                    <div class="details">
+                        <div class="description_head">
+                            <h2>${card.name}</h2>
+                            <span>${itemPrice}</span>
+                        </div>
+                        <p>${card.description}</p>
+                    </div>
+                
+            </div>
+            `
+            layout.append(newDiv)
+        }
+    }
+
 })
 .catch(function(error) {
     console.log('Vraiment, ça va pas...' + error.message);
