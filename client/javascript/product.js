@@ -42,9 +42,15 @@ allCameras.then(async function(response) {
                             <span>${itemPrice}</span>
                         </div>
                         <p>${card.description}</p>
-                        <select name="lenses" id="lenses_selection">
-                            ${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}
-                        </select>
+                        <div class="card_footer">
+                            <div class="option_selection">
+                                <span>Select your lense</span>
+                                <select name="lenses" id="lenses_selection">
+                                    ${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}
+                                </select>
+                            </div>
+                            <button><img src="images/add-to-cart.svg" alt"add to cart illustration"></button>
+                        </div>
                     </div>
                 
             </div>

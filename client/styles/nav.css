@@ -15,17 +15,51 @@ ul {
 }
 
 nav a {
+    text-decoration: none;
+    font-weight: 700;
     cursor: pointer;
 }
 
-nav a:hover {
-    text-decoration: underline;
+nav a:visited {
+    color: black;
 }
 
-nav button {
+nav a:hover {
+    border-bottom: 3px solid rgb(56, 19, 156);
+}
+
+#cartButton {
     width: fit-content;
     height: fit-content;
     border: none;
     background: transparent;
     cursor: pointer;
+}
+
+@keyframes go_to_cart_animation {
+    0% {
+        transform: scale(1);
+    }
+    33% {
+        transform: scale(1.2);
+    }
+    66% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+#cartButton img:hover {
+    animation: ease-in-out;
+    animation-name: go_to_cart_animation;
+    animation-duration: 0.5s;
+    transform: scale(1.2);
+}
+
+#cartButton img {
+    width: 35px;
+    height: 35px;
+    transition: ease-in-out 0.3s;
 }
