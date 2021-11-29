@@ -22,13 +22,17 @@ fetch("http://localhost:3000/api/cameras")
                 </div>
                 <div class="item_side">
                     <div class="item_buttons">
-                        <button id="update_button"><img src="images/update.svg" alt="pencil icon"></button>
                         <button id="delete_button"><img src="images/delete.svg" alt="rubish container icon"></button>
                     </div>
                     <span id="selected_item_total">${totalPrice}</span>
                 </div>
             </li>
         </ul>
+        
+        <div id="cart_preview">
+            <span>Total price: ${totalPrice}</span>
+            <a id="to_confirm_button" href="confirmation.html"><img src="images/go-to-confirm.svg" alt="shopping basket icon"></a>
+        </div>
     </div>
     `
     layout.append(newDiv)
