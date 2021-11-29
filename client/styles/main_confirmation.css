@@ -1,0 +1,79 @@
+#payment_view {
+    width: fit-content;
+    padding: 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    box-shadow: 5px 5px 15px -5px #000000;
+    border: 2px solid rgb(56, 19, 156);
+    border-radius: 3px;
+    font-size: medium;
+    font-weight: 500;
+}
+
+#payment_view h2 {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 1em;
+}
+
+#payment_view span strong {
+    font-weight: 700;
+}
+
+#payment_view span:last-of-type {
+    border-bottom: 1px solid black;
+    padding-bottom: 2em;
+
+}
+
+#payments_methods {
+    display: flex;
+    gap: 1em;
+}
+
+#payments_methods img:hover {
+    transform: scale(1.2);
+}
+
+#payments_methods img {
+    padding: 0.2em;
+    width: 60px;
+    height: 40px;
+    border: 2px solid rgb(56, 19, 156);
+    border-radius: 10px;
+    object-fit: fill;
+    transition: ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+#pay_button {
+    font-size: large;
+    font-weight: 600;
+    padding: 1em 3em;
+    color: white;
+    border-radius: 3px;
+    border: 2px solid rgb(56, 19, 156);
+    background-color: rgb(56, 19, 156);
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+#pay_button:hover {
+    background-color: white;
+    color: rgb(56, 19, 156);
+    box-sizing: border-box;
+}
+
+#payment_view a {
+    text-align: center;
+}
+
+#payment_view a,#payment_view a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#payment_view a:hover {
+    text-decoration: underline;
+}

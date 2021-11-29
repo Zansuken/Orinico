@@ -3,6 +3,7 @@
 @import url(main_index.css);
 @import url(main_products.css);
 @import url(main_cart.css);
+@import url(main_confirmation.css);
 @import url(footer.css);
 
 * {
