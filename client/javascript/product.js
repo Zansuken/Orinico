@@ -1,3 +1,4 @@
+
 const layout = document.querySelector("#product_view")
 
 fetch("http://localhost:3000/api/cameras")
@@ -13,14 +14,9 @@ fetch("http://localhost:3000/api/cameras")
         for (const card of value) {
             if (card._id === url) {
                 document.title = "Orinoco | " + card.name
-                function convertPrice() {
-                    let price = `${card.price}`
-                    price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price / 100)
-                    return price
-                }
 
                 const newDiv = document.createElement('div')
-                let itemPrice = convertPrice(card.price)
+                let convertedPrice = convertPrice(card.price)
 
 
                 newDiv.innerHTML = `
@@ -30,7 +26,7 @@ fetch("http://localhost:3000/api/cameras")
                     <div class="details_products">
                         <div class="description_head">
                             <h2>${card.name}</h2>
-                            <span>${itemPrice}</span>
+                            <span>${convertedPrice}</span>
                         </div>
                         <p>${card.description}</p>
                         <div class="card_footer">

@@ -4,21 +4,7 @@ fetch("http://localhost:3000/api/cameras")
     
     console.log(value);
     const layout = document.querySelector("#cart_view");
-
-    function convertPrice() {
-        let price = `${value[0].price}`
-        price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price / 100)
-        return price
-    }
-
     const newDiv = document.createElement('div')
-    // function convertPrice() {
-    //     let price = `${card.price}`
-    //     price = Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR'}).format( price / 100 )
-    //     return price
-    // }
-    // let itemPrice = convertPrice(`${card.price}`);
-    // let itemProductPage = card._id
     let totalSelected = 1
     let totalPrice = convertPrice(totalSelected * value[0].price)
     
