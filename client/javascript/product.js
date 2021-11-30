@@ -7,7 +7,6 @@ fetch("http://localhost:3000/api/cameras")
 
         let url = window.location.search
         url = url.substring(5, url.length)
-        console.log(value);
 
         for (const card of value) {
             if (card._id === url) {
@@ -22,7 +21,8 @@ fetch("http://localhost:3000/api/cameras")
                 let newAmount = document.querySelector("#actual_amount_selected")
                 const minusBtn = document.querySelector("#minus_button")
                 const plusBtn = document.querySelector("#plus_button")
-
+                const addToCartBtn = document.querySelector("#send_to_cart_button")
+                const selector = document.querySelector("#lenses_selection")
 
                 newImgUrl.setAttribute("src", card.imageUrl)
                 newName.innerHTML = card.name
@@ -41,6 +41,34 @@ fetch("http://localhost:3000/api/cameras")
 
                 plusBtn.addEventListener("click", () => {
                     actualAmount++
+                    newAmount.innerHTML = actualAmount
+                })
+                
+                selector.addEventListener("change", (e) => {
+                })
+
+                
+                addToCartBtn.addEventListener("click", (e) => {
+                    e.preventDefault()
+
+
+                    const newItemRef = Math.random().toString(36).substr(2, 10);
+
+                    let newItem = new Item(
+                        newItemRef,
+                        card.name,
+                        card.price,
+                        card.description,
+                        card.imageUrl,
+                        actualAmount
+                    )
+                    if (actualAmount > 0) {
+                        basket.push(newItem)
+                    } else {
+                        alert("Nothing to add")
+                    }
+                    localStorage.setItem("cameras", JSON.stringify(basket))
+                    actualAmount = 0
                     newAmount.innerHTML = actualAmount
                 })
                 

@@ -4,5 +4,18 @@ function convertPrice(itemPrice) {
     return price
 }
 
-const minusBtn = document.querySelector("#minus_button")
-const plusBtn = document.querySelector("#plus_button")
+let basket = JSON.parse(localStorage.getItem('cameras')) || []
+
+function clearBasket() {
+    basket = []
+}
+class Item {
+    constructor(id, name, price, description, imageUrl, quantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.quantity = quantity;
+    }
+}
