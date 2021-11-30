@@ -1,5 +1,3 @@
-
-
 #product_view {
     width: 80vw;
 }
@@ -65,6 +63,37 @@ option {
     margin-bottom: 1em;
     margin-right: 1em;
     transition: ease-in-out 0.3s;
+}
+
+@keyframes cart_plus_minus_animation {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#amount_selection {
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
+
+#amount_selection button {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+}
+
+#amount_selection button:hover {
+    animation: ease-in-out;
+    animation-duration: 0.5s;
+    animation-name: cart_plus_minus_animation;
+}
+
+#actual_amount_selected {
+    font-size: large;
 }
 
 @keyframes cart_animation {

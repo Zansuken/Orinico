@@ -1,48 +1,50 @@
+let actualAmount = 0
 
-const layout = document.querySelector("#product_view")
 
 fetch("http://localhost:3000/api/cameras")
-.then(response => response.json())
-.then(async function(value) {
+    .then(response => response.json())
+    .then(async function (value) {
 
         let url = window.location.search
         url = url.substring(5, url.length)
         console.log(value);
 
-
-
         for (const card of value) {
             if (card._id === url) {
                 document.title = "Orinoco | " + card.name
 
-                const newDiv = document.createElement('div')
-                let convertedPrice = convertPrice(card.price)
+                const newImgUrl = document.querySelector("#product_img")
+                const newName = document.querySelector(".description_head h2")
+                const newPrice = document.querySelector(".description_head span")
+                const newDescription = document.querySelector("#card_description")
+                const newOptions = document.querySelector("#lenses_selection")
+
+                let newAmount = document.querySelector("#actual_amount_selected")
+                const minusBtn = document.querySelector("#minus_button")
+                const plusBtn = document.querySelector("#plus_button")
 
 
-                newDiv.innerHTML = `
-            <div class="card_product">
+                newImgUrl.setAttribute("src", card.imageUrl)
+                newName.innerHTML = card.name
+                newPrice.innerHTML = convertPrice(card.price)
+                newDescription.innerHTML = card.description
+                newOptions.innerHTML = `${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}`
                 
-                    <img src="${card.imageUrl}" alt="camera">
-                    <div class="details_products">
-                        <div class="description_head">
-                            <h2>${card.name}</h2>
-                            <span>${convertedPrice}</span>
-                        </div>
-                        <p>${card.description}</p>
-                        <div class="card_footer">
-                            <div class="option_selection">
-                                <span>Select your lense</span>
-                                <select name="lenses" id="lenses_selection">
-                                    ${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}
-                                </select>
-                            </div>
-                            <button><img src="images/add-to-cart.svg" alt"add to cart illustration"></button>
-                        </div>
-                    </div>
+                minusBtn.addEventListener("click", () => {
+                    if (actualAmount > 0) {
+                        actualAmount--
+                    } else {
+                        return
+                    }
+                    newAmount.innerHTML = actualAmount
+                })
+
+                plusBtn.addEventListener("click", () => {
+                    actualAmount++
+                    newAmount.innerHTML = actualAmount
+                })
                 
-            </div>
-            `
-                layout.append(newDiv)
+
             }
         }
 
