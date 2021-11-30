@@ -10,7 +10,7 @@ fetch("http://localhost:3000/api/cameras")
         <div class="item_details">
             <h2>${item.name}</h2>
             <p>${item.description}</p>
-            <span id="option_selected"><strong>Options: </strong></span>
+            <span id="option_selected"><strong>Options: ${item.option}</strong></span>
             <span id="item_quantity"><strong>Quantity: ${item.quantity}</strong> </span>
         </div>
         <div class="item_side">
@@ -22,7 +22,7 @@ fetch("http://localhost:3000/api/cameras")
         cartList.appendChild(newLi)
     }
 
-    
+
 
 })
 .catch(function(err) {

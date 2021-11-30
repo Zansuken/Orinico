@@ -51,7 +51,6 @@ fetch("http://localhost:3000/api/cameras")
                 addToCartBtn.addEventListener("click", (e) => {
                     e.preventDefault()
 
-
                     const newItemRef = Math.random().toString(36).substr(2, 10);
 
                     let newItem = new Item(
@@ -60,8 +59,11 @@ fetch("http://localhost:3000/api/cameras")
                         card.price,
                         card.description,
                         card.imageUrl,
-                        actualAmount
+                        actualAmount,
+                        selector.value
                     )
+
+                    console.log(newItem);
                     if (actualAmount > 0) {
                         basket.push(newItem)
                     } else {
