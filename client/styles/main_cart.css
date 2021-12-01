@@ -11,10 +11,30 @@
 
 .cart_list ul, #cart_preview {
     width: auto;
-    padding-right: 0;
     display: flex;
     flex-direction: column;
     gap: 2em;
+}
+
+.cart_list ul {
+    height: 53vh;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding-right: 1em;
+    padding-left: 1em;
+    transform: translateX(13px);
+}
+
+.cart_list ul::-webkit-scrollbar {
+    background-color: rgb(56, 19, 156);
+    border-radius: 10px;
+}
+
+.cart_list ul::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px -5px #000000;
+    border: 2px solid rgb(56, 19, 156);
 }
 
 .cart_list li {
@@ -106,17 +126,19 @@
 }
 
 #cart_preview {
+    width: 50vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1em;
+    margin-right: auto;
+    margin-left: auto;
     border-radius: 5px;
     box-shadow: 5px 5px 15px -5px #000000;
     border: 2px solid rgb(56, 19, 156);
+    background-color: white;
     font-size: x-large;
-    position: fixed;
-    bottom: 60px;
 }
 
 #to_confirm_button img {
