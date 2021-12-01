@@ -5,10 +5,14 @@ function convertPrice(itemPrice) {
 }
 
 let basket = JSON.parse(localStorage.getItem('cameras')) || [];
+let totalAmount = JSON.parse(localStorage.getItem('total')) || [];
+
 
 function clearBasket() {
     localStorage.clear()
 }
+
+let totalToPay = 0 
 
 
 class Item {

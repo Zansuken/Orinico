@@ -120,6 +120,12 @@
     width: 30px;
 }
 
+#cart_preview #delete_button:hover {
+    animation: ease-in-out;
+    animation-name: buttons_animation;
+    animation-duration: 0.5s;
+}
+
 #selected_item_total {
     font-size: x-large;
     font-weight: 700;
@@ -139,6 +145,17 @@
     border: 2px solid rgb(56, 19, 156);
     background-color: white;
     font-size: x-large;
+}
+
+#cart_preview span {
+    border-right: 1px solid black;
+    padding-right: 1em;
+}
+
+#cart_preview div {
+    display: flex;
+    align-items: center;
+    gap: 1em;
 }
 
 #to_confirm_button img {

@@ -23,6 +23,15 @@ fetch("http://localhost:3000/api/cameras")
         cartList.appendChild(newLi)
     }
 
+    
+    for (const item of basket) {
+        totalToPay = totalToPay += (item.price * item.quantity);
+        localStorage.setItem("total", JSON.stringify(totalToPay));
+    }
+
+    
+    document.querySelector('#cart_preview span').innerHTML = "Total: " + convertPrice(totalToPay);
+
     document.querySelector('#cart_preview #delete_button').addEventListener('click', () => {
         clearBasket()
         window.location.reload()

@@ -70,7 +70,6 @@ fetch("http://localhost:3000/api/cameras")
                         if (item.option == newItem.option && item.name == newItem.name) {
                             alreadyExist = true
                             indexModification = basket.indexOf(item)
-                            console.log(indexModification);
                         } else {
 
                         }
