@@ -115,6 +115,8 @@
     box-shadow: 5px 5px 15px -5px #000000;
     border: 2px solid rgb(56, 19, 156);
     font-size: x-large;
+    position: fixed;
+    bottom: 60px;
 }
 
 #to_confirm_button img {

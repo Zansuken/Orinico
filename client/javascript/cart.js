@@ -27,7 +27,6 @@ fetch("http://localhost:3000/api/cameras")
         clearBasket()
         window.location.reload()
     })
-
 })
 .catch(function(err) {
     return err
