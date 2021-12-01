@@ -4,13 +4,14 @@ fetch("http://localhost:3000/api/cameras")
     
     const cartList = document.querySelector("#cart_ul");
 
+    
     for (const item of basket) {
         let newLi = document.createElement("li")
         newLi.innerHTML = `<img src="${item.imageUrl}" alt="camera" class="item_image">
         <div class="item_details">
             <h2>${item.name}</h2>
             <p>${item.description}</p>
-            <span id="option_selected"><strong>Options: </strong></span>
+            <span id="option_selected"><strong>Options: ${item.option}</strong></span>
             <span id="item_quantity"><strong>Quantity: ${item.quantity}</strong> </span>
         </div>
         <div class="item_side">
@@ -22,7 +23,10 @@ fetch("http://localhost:3000/api/cameras")
         cartList.appendChild(newLi)
     }
 
-    
+    document.querySelector('#cart_preview #delete_button').addEventListener('click', () => {
+        clearBasket()
+        window.location.reload()
+    })
 
 })
 .catch(function(err) {

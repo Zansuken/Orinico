@@ -51,7 +51,6 @@ fetch("http://localhost:3000/api/cameras")
                 addToCartBtn.addEventListener("click", (e) => {
                     e.preventDefault()
 
-
                     const newItemRef = Math.random().toString(36).substr(2, 10);
 
                     let newItem = new Item(
@@ -60,14 +59,32 @@ fetch("http://localhost:3000/api/cameras")
                         card.price,
                         card.description,
                         card.imageUrl,
-                        actualAmount
+                        actualAmount,
+                        selector.value
                     )
-                    if (actualAmount > 0) {
-                        basket.push(newItem)
+                    
+                    let alreadyExist = false
+                    let indexModification;
+
+                    for (const item of basket) {
+                        if (item.option == newItem.option && item.name == newItem.name) {
+                            alreadyExist = true
+                            indexModification = basket.indexOf(item)
+                            console.log(indexModification);
+                        } else {
+
+                        }
+                    }
+
+                    if (actualAmount > 0 && alreadyExist == false) {
+                        basket.push(newItem);
+                        localStorage.setItem("cameras", JSON.stringify(basket));
+                    } else if (actualAmount > 0 && alreadyExist == true) {
+                        basket[indexModification].quantity = newItem.quantity + basket[indexModification].quantity
+                        localStorage.setItem("cameras", JSON.stringify(basket));
                     } else {
                         alert("Nothing to add")
                     }
-                    localStorage.setItem("cameras", JSON.stringify(basket))
                     actualAmount = 0
                     newAmount.innerHTML = actualAmount
                 })

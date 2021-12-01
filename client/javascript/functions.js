@@ -4,18 +4,21 @@ function convertPrice(itemPrice) {
     return price
 }
 
-let basket = JSON.parse(localStorage.getItem('cameras')) || []
+let basket = JSON.parse(localStorage.getItem('cameras')) || [];
 
 function clearBasket() {
-    basket = []
+    localStorage.clear()
 }
+
+
 class Item {
-    constructor(id, name, price, description, imageUrl, quantity) {
+    constructor(id, name, price, description, imageUrl, quantity, option) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
         this.quantity = quantity;
+        this.option = option;
     }
 }

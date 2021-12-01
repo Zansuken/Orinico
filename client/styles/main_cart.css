@@ -92,6 +92,14 @@
     animation-duration: 0.5s;
 }
 
+.delete_button {
+    z-index: 10;
+}
+
+#cart_preview #delete_button {
+    width: 30px;
+}
+
 #selected_item_total {
     font-size: x-large;
     font-weight: 700;

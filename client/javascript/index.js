@@ -2,7 +2,6 @@ fetch("http://localhost:3000/api/cameras")
 .then(response => response.json())
 .then(async function(value) {
     
-    console.log(value);
     const layout = document.querySelector("article");
     
     for (const card of value) {
