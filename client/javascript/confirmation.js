@@ -40,6 +40,30 @@ fetch("http://localhost:3000/api/cameras")
             }
         })
     }
+
+    const submitLayout = document.querySelector('#payment_view')
+    document.querySelector('#pay_button').addEventListener('click', () => {
+        submitLayout.innerHTML = `
+        <h2>Last step to order!</h2>
+        <form>
+            <span>First Name:</span>
+            <input type="text"></input>
+            <span>Last Name:</span>
+            <input type="text"></input>
+            <span>Address:</span>
+            <input type="text"></input>
+            <span>City:</span>
+            <input type="text"></input>
+            <span id="mail_input">E-mail:</span>
+            <input type="email"></input>
+            <span style="border: none"></span>
+            <input type="submit" value="Order" id="order_button">
+        </form>
+    `
+    
+
+    })
+    
     } else {
         newDiv.innerHTML = `
         <div id="empty_cart">

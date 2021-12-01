@@ -48,7 +48,7 @@
     background: white;
 }
 
-#pay_button {
+#pay_button, input[type="submit"] {
     font-size: large;
     font-weight: 600;
     padding: 1em 3em;
@@ -60,7 +60,7 @@
     transition: ease-in-out 0.3s;
 }
 
-#pay_button:hover {
+#pay_button:hover, input[type="submit"]:hover {
     background-color: white;
     color: rgb(56, 19, 156);
     box-sizing: border-box;
@@ -91,4 +91,18 @@
     text-align: center;
     font-size: x-large;
     color: rgb(56, 19, 156);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="email"] {
+    margin-bottom: 1em;
+    margin-top: 0.3em;
+}
+
+#mail_input {
+    padding-bottom: 0;
 }
