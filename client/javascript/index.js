@@ -1,14 +1,23 @@
+// Home page
+
 fetch("http://localhost:3000/api/cameras")
 .then(response => response.json())
 .then(async function(value) {
     
+    // Get the tag where new view will appear
+
     const layout = document.querySelector("article");
     
+    // Loop inside datas of api/cameras
+
     for (const card of value) {
 
         const newDiv = document.createElement('div')
         let itemPrice = convertPrice(`${card.price}`);
         let itemProductPage = card._id
+
+        // Define the content of the home page view
+
         newDiv.innerHTML = `
         <div class="card">
             <a href="/client/products.html?_id=${itemProductPage}">
@@ -23,6 +32,8 @@ fetch("http://localhost:3000/api/cameras")
             </a>
         </div>
         `
+        // Add the new view to the page
+        
         layout.append(newDiv)
     }
 

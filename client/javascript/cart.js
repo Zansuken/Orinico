@@ -1,10 +1,13 @@
 fetch("http://localhost:3000/api/cameras")
 .then(response => response.json())
 .then(async function(value) {
-    
+
+    // Get the tag where new cart view will appear
+
     const cartList = document.querySelector("#cart_ul");
 
-    
+    // Loop inside localStorage "basket" object and create a new line in the cart for each items
+
     for (const item of basket) {
         let newLi = document.createElement("li")
         newLi.innerHTML = `<img src="${item.imageUrl}" alt="camera" class="item_image">
@@ -23,15 +26,20 @@ fetch("http://localhost:3000/api/cameras")
         cartList.appendChild(newLi)
     }
 
-    
+    // Loop inside localStorage "basket" object then set total in charge using quantities and prices of items
+    // Send updated total to localStorage "totalToPay"
+
     for (const item of basket) {
         totalToPay = totalToPay += (item.price * item.quantity);
         localStorage.setItem("total", JSON.stringify(totalToPay));
     }
 
-    
+    // Update total in charge view
+
     document.querySelector('#cart_preview span').innerHTML = "Total: " + convertPrice(totalToPay);
 
+    // Clear all localStorage items then reload the page to refresh view
+    
     document.querySelector('#cart_preview #delete_button').addEventListener('click', () => {
         clearBasket()
         window.location.reload()
