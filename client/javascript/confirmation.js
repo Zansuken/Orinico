@@ -67,16 +67,16 @@ fetch("http://localhost:3000/api/cameras")
         document.querySelector('#pay_button').addEventListener('click', () => {
             submitLayout.innerHTML = `
             <h2>Last step to order!</h2>
-            <form>
+            <form method="POST">
                 <span>First Name:</span>
-                <input type="text"></input>
+                <input type="text" id="first_name"></input>
                 <span>Last Name:</span>
-                <input type="text"></input>
+                <input type="text" id="last_name"></input>
                 <span>Address:</span>
-                <input type="text"></input>
+                <input type="text" id="client_address"></input>
                 <span>City:</span>
-                <input type="text"></input>
-                <span id="mail_input">E-mail:</span>
+                <input type="text" id="city"></input>
+                <span>E-mail:</span>
                 <input type="email"></input>
                 <span style="border: none"></span>
                 <input type="submit" value="Order" id="order_button">
@@ -84,7 +84,70 @@ fetch("http://localhost:3000/api/cameras")
         `
         
 
+        const singleWordRegex = /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/
+        const spacedWordRegex = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/
+        
+        const orderBtn = document.querySelector('#order_button')
+    
+        
+        orderBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            
+            let contact = {
+                firstName: document.querySelector('#first_name').value,
+                lastName: document.querySelector('#last_name').value,
+                address: document.querySelector('#client_address').value,
+                city: document.querySelector('#city').value,
+                email: document.querySelector('input[type="email"]').value
+            }
+
+            let newDate = new Date
+        
+            if (
+                (singleWordRegex.test(contact.firstName) == true) &&
+                (singleWordRegex.test(contact.lastName) == true) &&
+                (spacedWordRegex.test(contact.address) == true) &&
+                (singleWordRegex.test(contact.city) == true)
+                
+                ) {
+                    let orderDetails = {
+                        contact,
+                        newDate,
+                        basket
+                    }
+                    let products = []
+                    let orderId = "An ID"
+    
+                    for (const product of basket) {
+                        products.push(product.id)
+                    }
+                    fetch("http://localhost:3000/api/cameras/order", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ contact, products })
+                    })
+                    .then(async (response) => await response.json())
+                    .then(data => {
+                        console.log(data);
+                    }).catch((error) => {console.log(error)})
+                    
+                    return
+                    submitLayout.innerHTML = `
+                    <h2>Thanks for order!</h2>
+                    <img src="images/bye-illustration.jpg" id="bye_img">
+                    <a href="index.html">Go back to home page</a>
+                    `
+
+                
+                } else {
+                    console.log('informations are not valid');
+                }
         })
+    })
+    
     
         // If cart is empty show this view instead
 
@@ -98,10 +161,11 @@ fetch("http://localhost:3000/api/cameras")
     layout.append(newDiv)
     }
 
-
     
-
 })
 .catch(function(err) {
     return err
 })
+
+
+

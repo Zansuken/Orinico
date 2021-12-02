@@ -106,3 +106,7 @@ input[type="text"], input[type="email"] {
 #mail_input {
     padding-bottom: 0;
 }
+
+#bye_img {
+    width: 50vw;
+}
