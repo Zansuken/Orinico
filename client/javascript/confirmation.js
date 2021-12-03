@@ -144,6 +144,7 @@ orderBtn.addEventListener('click', (e) => {
         <a href="index.html">Go back to home page</a>
         `
 
+        clearBasket()
 
     } else {
         console.log('informations are not valid');
