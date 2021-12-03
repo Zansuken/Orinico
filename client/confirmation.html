@@ -30,16 +30,16 @@
     <aside>
         <h2>Last step to order!</h2>
             <form method="POST">
-                <span>First Name:</span>
-                <input type="text" id="first_name"></input>
-                <span>Last Name:</span>
-                <input type="text" id="last_name"></input>
-                <span>Address:</span>
-                <input type="text" id="client_address"></input>
-                <span>City:</span>
-                <input type="text" id="city"></input>
-                <span>E-mail:</span>
-                <input type="email"></input>
+                <span>First Name: <span id="error_firstname"></span></span>
+                <input type="text" id="first_name" min="3" max="12" required></input>
+                <span>Last Name: <span id="error_lastname"></span></span>
+                <input type="text" id="last_name" min="3" max="12" required></input>
+                <span>Address: <span id="error_address"></span></span>
+                <input type="text" id="client_address" min="7" max="25" required></input>
+                <span>City: <span id="error_city"></span></span>
+                <input type="text" id="city" min="3" max="12" required></input>
+                <span>E-mail: <span id="error_email"></span></span>
+                <input type="email" id="email" required></input>
                 <span style="border: none"></span>
                 <input type="submit" value="Order" id="order_button">
             </form>

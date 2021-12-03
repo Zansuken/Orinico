@@ -18,26 +18,28 @@ fetch("http://localhost:3000/api/cameras")
             // Create a new order reference by generating new string with random characters (a-z and numbers only)
 
             const orderRef = Math.random().toString(36).substr(2, 10);
+            localStorage.setItem("order", JSON.stringify(orderRef));
 
             // Define a potential taxe from total in charge
 
             let taxesFee = convertPrice(total * 0.2)
             newDiv.innerHTML = `
-        <div id="payment_view">
-            <h2>Order Summary</h2>
-            <span>Order reference: <strong>${orderRef}</strong></span>
-            <span>Shipping: <strong>free</strong></span>
-            <span>Taxes: <strong>${taxesFee}</strong></span>
-            <span>Total: <strong>${convertPrice(total)}</strong></span>
-            <div id="payments_methods">
-                <img class="payment_options" src="images/visa-icon.svg" alt="visa icon">
-                <img class="payment_options" src="images/master-card-icon.svg" alt="master card icon">
-                <img class="payment_options" src="images/paypal-icon.svg" alt="paypal icon">
+            <div id="payment_view">
+                <h2>Order Summary</h2>
+                <span>Order reference: <strong>${orderRef}</strong></span>
+                <span>Shipping: <strong>free</strong></span>
+                <span>Taxes: <strong>${taxesFee}</strong></span>
+                <span>Total: <strong>${convertPrice(total)}</strong></span>
+                <div id="payments_methods">
+                    <img class="payment_options" src="images/visa-icon.svg" alt="visa icon">
+                    <img class="payment_options" src="images/master-card-icon.svg" alt="master card icon">
+                    <img class="payment_options" src="images/paypal-icon.svg" alt="paypal icon">
+                </div>
+                <button id="pay_button">Continue to secure payment</button>
+                <a href="cart.html">Cancel payment</a>
             </div>
-            <button id="pay_button">Continue to secure payment</button>
-            <a href="cart.html">Cancel payment</a>
-        </div>
-        `
+            `
+
             layout.append(newDiv)
 
             // Get the payment methods buttons
@@ -70,6 +72,7 @@ fetch("http://localhost:3000/api/cameras")
                 submitLayout.style.display = "none"
                 formLayout.style.transform = "translateX(0)"
                 formLayout.style.opacity = "1"
+
             })
 
             // If cart is empty show this view instead
@@ -101,25 +104,32 @@ let products = []
 orderBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
+    const firstName = document.querySelector('#first_name')
+    const lastName = document.querySelector('#last_name')
+    const address = document.querySelector('#client_address')
+    const city = document.querySelector('#city')
+    const email = document.querySelector('#email')
+
     contact = {
-        firstName: document.querySelector('#first_name').value,
-        lastName: document.querySelector('#last_name').value,
-        address: document.querySelector('#client_address').value,
-        city: document.querySelector('#city').value,
-        email: document.querySelector('input[type="email"]').value
+        firstName: firstName.value,
+        lastName: lastName.value,
+        address: address.value,
+        city: city.value,
+        email: email.value
     }
 
     for (const product of basket) {
         products.push(product.id)
     }
     
-    console.log(products);
+    console.log(contact.email);
 
     if (
         (singleWordRegex.test(contact.firstName) == true) &&
         (singleWordRegex.test(contact.lastName) == true) &&
         (spacedWordRegex.test(contact.address) == true) &&
-        (singleWordRegex.test(contact.city) == true)
+        (singleWordRegex.test(contact.city) == true) && 
+        (contact.email.length > 0)
 
     ) {
 
@@ -132,14 +142,13 @@ orderBtn.addEventListener('click', (e) => {
             body: JSON.stringify({ contact, products })
         })
             .then(async (response) => await response.json())
-            .then(data => {
-                // console.log(data);
-            }).catch((error) => { return error })
+            .catch((error) => { return error })
 
 
         formLayout.style.textAlign = "center"
         formLayout.innerHTML = `
         <h2>Thanks for order!</h2>
+        <h3>Order reference: ${localStorage.getItem('order')}</h3>
         <img src="images/bye-illustration.jpg" id="bye_img">
         <a href="index.html">Go back to home page</a>
         `
@@ -147,6 +156,21 @@ orderBtn.addEventListener('click', (e) => {
         clearBasket()
 
     } else {
-        console.log('informations are not valid');
+        if (singleWordRegex.test(contact.firstName) == false) {
+            document.querySelector('#error_firstname').innerHTML ='3 to 12 characters, letters only'
+        }
+        if (singleWordRegex.test(contact.lastName) == false) {
+            document.querySelector('#error_lastname').innerHTML ='3 to 12 characters, letters only'
+        }
+        if (spacedWordRegex.test(contact.address) == false) {
+            document.querySelector('#error_address').innerHTML ='Valid address only'
+        }
+        if (singleWordRegex.test(contact.firstName) == false) {
+            document.querySelector('#error_city').innerHTML ='Valid city only'
+        }
+        if (contact.email.length > 0) {
+            document.querySelector('#error_email').innerHTML ='Is not an email address'
+        }
+        console.log('Informations are not valid');
     }
 })

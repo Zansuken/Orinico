@@ -94,6 +94,7 @@
 }
 
 aside {
+    min-width: 360px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -118,5 +119,10 @@ input[type="text"], input[type="email"] {
 
 #bye_img {
     max-width: 50vw;
-    max-height: 432px;
+    max-height: 350px;
+}
+
+span > span {
+    font-size: small;
+    color: red;
 }
