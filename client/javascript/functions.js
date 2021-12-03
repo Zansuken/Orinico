@@ -35,3 +35,19 @@ class Item {
         this.option = option;
     }
 }
+
+const cartList = document.querySelector("#cart_ul");
+
+function removeFromBasket() {
+    for (const item of basket) {
+        const singleDeleteBtn = document.querySelector('#delete_button' + (item.id + item.option).replace('.', '').replace(' ', ''))
+        let itemId = item.id
+        let itemOption = item.option.replace('.', '').replace(' ', '')
+        let checkId = itemId + itemOption
+        let checkBtnId = "delete_button" + itemId + itemOption
+        if (singleDeleteBtn.getAttribute('id') == checkBtnId) {
+            console.log('say Hello');
+            document.getElementById(checkId).remove()
+        }
+    }
+}

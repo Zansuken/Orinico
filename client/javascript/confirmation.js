@@ -156,6 +156,9 @@ orderBtn.addEventListener('click', (e) => {
         clearBasket()
 
     } else {
+
+        // Add an error message on any invalid input from user
+        
         if (singleWordRegex.test(contact.firstName) == false) {
             document.querySelector('#error_firstname').innerHTML ='3 to 12 characters, letters only'
         }

@@ -4,8 +4,6 @@ fetch("http://localhost:3000/api/cameras")
 
     // Get the tag where new cart view will appear
 
-    const cartList = document.querySelector("#cart_ul");
-
     if (basket.length == 0) {
         const newDiv = document.createElement('div')
         const cartView = document.querySelector('.cart_list')
@@ -28,6 +26,7 @@ fetch("http://localhost:3000/api/cameras")
     
         for (const item of basket) {
             let newLi = document.createElement("li")
+            newLi.setAttribute("id", (item.id + item.option).replace('.', '').replace(' ', ''))
             newLi.innerHTML = `<img src="${item.imageUrl}" alt="camera" class="item_image">
             <div class="item_details">
                 <h2>${item.name}</h2>
@@ -37,12 +36,23 @@ fetch("http://localhost:3000/api/cameras")
             </div>
             <div class="item_side">
                 <div class="item_buttons">
-                <button id="delete_button"><img src="images/delete.svg" alt="rubish container icon"></button>
+                <button class="delete_buttons" id="delete_button${(item.id + item.option).replace('.', '').replace(' ', '')}"><img src="images/delete.svg" alt="rubish container icon"></button>
                 </div>
                 <span id="selected_item_total">${convertPrice(item.price * item.quantity)}</span>
             </div>`
             cartList.appendChild(newLi)
         }
+
+        const deleteButtons = document.querySelectorAll('.delete_buttons')
+        console.log(deleteButtons.length);
+        const liId = document.querySelectorAll('#cart_ul li')
+        console.log(liId.length);
+
+        for (let i = 0; i < deleteButtons.length; i++) {
+            deleteButtons[i].addEventListener('click',function (e) {      
+              liId[i].remove()
+            } , false);
+         }
     
         // Loop inside localStorage "basket" object then set total in charge using quantities and prices of items
         // Send updated total to localStorage "totalToPay"
