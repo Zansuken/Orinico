@@ -78,7 +78,7 @@ fetch("http://localhost:3000/api/cameras")
                     // Create new item with the Item class
 
                     let newItem = new Item(
-                        newItemRef,
+                        card._id,
                         card.name,
                         card.price,
                         card.description,

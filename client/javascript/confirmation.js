@@ -1,26 +1,28 @@
+const formLayout = document.querySelector('aside')
+
 fetch("http://localhost:3000/api/cameras")
-.then(response => response.json())
-.then(async function(value) {
-    
-    // Get the tag where new view will appear
+    .then(response => response.json())
+    .then(async function (value) {
 
-    const layout = document.querySelector("article");
-    const newDiv = document.createElement('div')
+        // Get the tag where new view will appear
 
-    // Define total price in charge
-    
-    let total = totalAmount
+        const layout = document.querySelector("article");
+        const newDiv = document.createElement('div')
 
-    if (totalAmount > 0) {
+        // Define total price in charge
 
-        // Create a new order reference by generating new string with random characters (a-z and numbers only)
+        let total = totalAmount
 
-        const orderRef = Math.random().toString(36).substr(2, 10);
+        if (totalAmount > 0) {
 
-        // Define a potential taxe from total in charge
-        
-        let taxesFee = convertPrice(total * 0.2)
-        newDiv.innerHTML = `
+            // Create a new order reference by generating new string with random characters (a-z and numbers only)
+
+            const orderRef = Math.random().toString(36).substr(2, 10);
+
+            // Define a potential taxe from total in charge
+
+            let taxesFee = convertPrice(total * 0.2)
+            newDiv.innerHTML = `
         <div id="payment_view">
             <h2>Order Summary</h2>
             <span>Order reference: <strong>${orderRef}</strong></span>
@@ -36,136 +38,114 @@ fetch("http://localhost:3000/api/cameras")
             <a href="cart.html">Cancel payment</a>
         </div>
         `
-        layout.append(newDiv)
+            layout.append(newDiv)
 
-        // Get the payment methods buttons
+            // Get the payment methods buttons
 
-        const paymentMethodBtn = document.querySelectorAll('.payment_options')
+            const paymentMethodBtn = document.querySelectorAll('.payment_options')
 
-        // Loop inside payment methods buttons
-        // Change background on click to show its selected
+            // Loop inside payment methods buttons
+            // Change background on click to show its selected
 
-        for (const btn of paymentMethodBtn) {
-            let backGroundWhite = false
-            btn.addEventListener('click', () => {
-                if (backGroundWhite === false) {
-                    btn.style.background = "rgb(56, 19, 156)"
-                    backGroundWhite = true
-                } else {
-                    btn.style.background = "white"
-                    backGroundWhite = false
-                }
-            })
-        }
-
-        // Get the form view for confirmation
-
-        const submitLayout = document.querySelector('#payment_view')
-
-        // When user click to confirm his cart, show form view
-        
-        document.querySelector('#pay_button').addEventListener('click', () => {
-            submitLayout.innerHTML = `
-            <h2>Last step to order!</h2>
-            <form method="POST">
-                <span>First Name:</span>
-                <input type="text" id="first_name"></input>
-                <span>Last Name:</span>
-                <input type="text" id="last_name"></input>
-                <span>Address:</span>
-                <input type="text" id="client_address"></input>
-                <span>City:</span>
-                <input type="text" id="city"></input>
-                <span>E-mail:</span>
-                <input type="email"></input>
-                <span style="border: none"></span>
-                <input type="submit" value="Order" id="order_button">
-            </form>
-        `
-        
-
-        const singleWordRegex = /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/
-        const spacedWordRegex = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/
-        
-        const orderBtn = document.querySelector('#order_button')
-    
-        
-        orderBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            
-            let contact = {
-                firstName: document.querySelector('#first_name').value,
-                lastName: document.querySelector('#last_name').value,
-                address: document.querySelector('#client_address').value,
-                city: document.querySelector('#city').value,
-                email: document.querySelector('input[type="email"]').value
+            for (const btn of paymentMethodBtn) {
+                let backGroundWhite = false
+                btn.addEventListener('click', () => {
+                    if (backGroundWhite === false) {
+                        btn.style.background = "rgb(56, 19, 156)"
+                        backGroundWhite = true
+                    } else {
+                        btn.style.background = "white"
+                        backGroundWhite = false
+                    }
+                })
             }
 
-            let newDate = new Date
-        
-            if (
-                (singleWordRegex.test(contact.firstName) == true) &&
-                (singleWordRegex.test(contact.lastName) == true) &&
-                (spacedWordRegex.test(contact.address) == true) &&
-                (singleWordRegex.test(contact.city) == true)
-                
-                ) {
-                    let orderDetails = {
-                        contact,
-                        newDate,
-                        basket
-                    }
-                    let products = []
-                    let orderId = "An ID"
-    
-                    for (const product of basket) {
-                        products.push(product.id)
-                    }
-                    fetch("http://localhost:3000/api/cameras/order", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ contact, products })
-                    })
-                    .then(async (response) => await response.json())
-                    .then(data => {
-                        console.log(data);
-                    }).catch((error) => {console.log(error)})
-                    
-                    return
-                    submitLayout.innerHTML = `
-                    <h2>Thanks for order!</h2>
-                    <img src="images/bye-illustration.jpg" id="bye_img">
-                    <a href="index.html">Go back to home page</a>
-                    `
+            // Get the form view for confirmation
 
-                
-                } else {
-                    console.log('informations are not valid');
-                }
-        })
-    })
-    
-    
-        // If cart is empty show this view instead
+            const submitLayout = document.querySelector('#payment_view')
 
-    } else {
-        newDiv.innerHTML = `
+            // When user click to confirm his cart, show form view
+
+            document.querySelector('#pay_button').addEventListener('click', () => {
+                submitLayout.style.display = "none"
+                formLayout.style.transform = "translateX(0)"
+                formLayout.style.opacity = "1"
+            })
+
+            // If cart is empty show this view instead
+
+        } else {
+            newDiv.innerHTML = `
         <div id="empty_cart">
             <h2>There was nothing in your cart :(...</h2>
             <a href="index.html">Go back to shopping!</a>
         </div>
     `
-    layout.append(newDiv)
+            layout.append(newDiv)
+        }
+
+
+    })
+    .catch(function (err) {
+        return err
+    })
+
+const singleWordRegex = /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/
+const spacedWordRegex = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/
+
+const orderBtn = document.querySelector('#order_button')
+
+let contact;
+let products = []
+
+orderBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    contact = {
+        firstName: document.querySelector('#first_name').value,
+        lastName: document.querySelector('#last_name').value,
+        address: document.querySelector('#client_address').value,
+        city: document.querySelector('#city').value,
+        email: document.querySelector('input[type="email"]').value
     }
 
+    for (const product of basket) {
+        products.push(product.id)
+    }
     
+    console.log(products);
+
+    if (
+        (singleWordRegex.test(contact.firstName) == true) &&
+        (singleWordRegex.test(contact.lastName) == true) &&
+        (spacedWordRegex.test(contact.address) == true) &&
+        (singleWordRegex.test(contact.city) == true)
+
+    ) {
+
+        fetch("http://localhost:3000/api/cameras/order", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ contact, products:[] })
+        })
+            .then(async (response) => await response.json())
+            .then(data => {
+                // console.log(data);
+            }).catch((error) => { return error })
+
+
+        formLayout.style.textAlign = "center"
+        formLayout.innerHTML = `
+        <h2>Thanks for order!</h2>
+        <img src="images/bye-illustration.jpg" id="bye_img">
+        <a href="index.html">Go back to home page</a>
+        `
+
+
+    } else {
+        console.log('informations are not valid');
+    }
 })
-.catch(function(err) {
-    return err
-})
-
-
-
