@@ -129,7 +129,7 @@ orderBtn.addEventListener('click', (e) => {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ contact, products:[] })
+            body: JSON.stringify({ contact, products })
         })
             .then(async (response) => await response.json())
             .then(data => {
