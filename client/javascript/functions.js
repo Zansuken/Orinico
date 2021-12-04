@@ -17,6 +17,7 @@ let orderDatas = JSON.parse(localStorage.getItem('order')) || [];
 function clearBasket() {
     localStorage.clear()
 }
+localStorage.getItem('order')
 
 // Define globally the total amount in charge for the client
 

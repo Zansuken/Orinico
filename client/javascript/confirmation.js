@@ -26,7 +26,7 @@ fetch("http://localhost:3000/api/cameras")
             newDiv.innerHTML = `
             <div id="payment_view">
                 <h2>Order Summary</h2>
-                <span>Order reference: <strong>${orderRef}</strong></span>
+                <span>Basket reference: <strong>${orderRef}</strong></span>
                 <span>Shipping: <strong>free</strong></span>
                 <span>Taxes: <strong>${taxesFee}</strong></span>
                 <span>Total: <strong>${convertPrice(total)}</strong></span>
@@ -142,18 +142,21 @@ orderBtn.addEventListener('click', (e) => {
             body: JSON.stringify({ contact, products })
         })
             .then(async (response) => await response.json())
+            .then(async (data) => {
+                console.log(data);
+                formLayout.style.textAlign = "center"
+                formLayout.innerHTML = `
+                <h2>Thanks for order!</h2>
+                <h3>Order reference: ${data.orderId}</h3>
+                <img src="images/bye-illustration.jpg" id="bye_img">
+                <a href="index.html">Go back to home page</a>
+                `
+                clearBasket()
+            })
             .catch((error) => { return error })
 
 
-        formLayout.style.textAlign = "center"
-        formLayout.innerHTML = `
-        <h2>Thanks for order!</h2>
-        <h3>Order reference: ${localStorage.getItem('order')}</h3>
-        <img src="images/bye-illustration.jpg" id="bye_img">
-        <a href="index.html">Go back to home page</a>
-        `
 
-        clearBasket()
 
     } else {
 

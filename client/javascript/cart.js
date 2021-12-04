@@ -51,6 +51,12 @@ fetch("http://localhost:3000/api/cameras")
         for (let i = 0; i < deleteButtons.length; i++) {
             deleteButtons[i].addEventListener('click',function (e) {      
               liId[i].remove()
+              basket.splice(i, 1)
+                localStorage.setItem('cameras', JSON.stringify(basket))
+                console.log(basket);
+                if (basket  == []) {
+                    window.location.reload()
+                }
             } , false);
          }
     
