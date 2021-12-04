@@ -94,10 +94,9 @@
 }
 
 aside {
-    min-width: 360px;
+    min-width: 264px;
     position: relative;
-    margin-left: auto;
-    margin-right: auto;
+    margin-right: 2em;
     transform: translateX(-500%);
     opacity: 0;
     transition: ease-in-out 0.7s;
@@ -118,11 +117,32 @@ input[type="text"], input[type="email"] {
 }
 
 #bye_img {
+    min-width: 300px;
     max-width: 50vw;
     max-height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
 }
 
 span > span {
     font-size: small;
     color: red;
+}
+
+@media (max-width: 375px) {
+    h3, a {
+        font-size: small;
+    }
+    aside {
+        padding: 1em;
+    }
+    #bye_img {
+        margin: 0;
+        padding: 0 2px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        box-sizing: border-box;
+    }
 }

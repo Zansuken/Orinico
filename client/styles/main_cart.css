@@ -19,7 +19,8 @@
 
 .cart_list ul {
     max-width: 790px;
-    height: 53vh;
+    height: fit-content;
+    max-height: 50vh;
     overflow-y: scroll;
     overflow-x: auto;
     padding-right: 1em;
@@ -145,6 +146,21 @@
     border: 2px solid rgb(56, 19, 156);
     background-color: white;
     font-size: x-large;
+}
+
+@media (max-width: 614px) {
+    #cart_preview {
+        font-size: small;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    .cart_list ul {
+        height: auto;
+        margin-bottom: 1em;
+    }
+    .cart_list {
+        min-height: 50vh;
+    }
 }
 
 #cart_preview span {

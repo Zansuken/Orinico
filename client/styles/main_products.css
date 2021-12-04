@@ -17,6 +17,12 @@
     position: relative;
 }
 
+@media (max-width: 823px) {
+    .card_product img {
+        height: auto;
+    }
+}
+
 .details_products {
     display: flex;
     flex-direction: column;

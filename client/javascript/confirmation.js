@@ -70,7 +70,8 @@ fetch("http://localhost:3000/api/cameras")
 
             document.querySelector('#pay_button').addEventListener('click', () => {
                 submitLayout.style.display = "none"
-                formLayout.style.transform = "translateX(0)"
+                formLayout.style.transform = "translateX(-50%)"
+                formLayout.style.left = "50%"
                 formLayout.style.opacity = "1"
 
             })
@@ -145,6 +146,8 @@ orderBtn.addEventListener('click', (e) => {
             .then(async (data) => {
                 console.log(data);
                 formLayout.style.textAlign = "center"
+                formLayout.style.transform = "translateX(-50%)"
+                formLayout.style.left = "50%"
                 formLayout.innerHTML = `
                 <h2>Thanks for order!</h2>
                 <h3>Order reference: ${data.orderId}</h3>

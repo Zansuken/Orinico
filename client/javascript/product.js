@@ -45,10 +45,10 @@ fetch("http://localhost:3000/api/cameras")
                 // Return options inside selector
 
                 newOptions.innerHTML = `${card.lenses.map(l => `<option value="${l}">${l}</option>`).join("")}`
-                
+
                 // Add events to view buttons
 
-                    // Decrement actual item amount selected
+                // Decrement actual item amount selected
 
                 minusBtn.addEventListener("click", () => {
                     if (actualAmount > 0) {
@@ -59,12 +59,13 @@ fetch("http://localhost:3000/api/cameras")
                     newAmount.innerHTML = actualAmount
                 })
 
-                    // Increment actual item amount selected
+                // Increment actual item amount selected
 
                 plusBtn.addEventListener("click", () => {
                     actualAmount++
                     newAmount.innerHTML = actualAmount
                 })
+
                 
                 // Add selected item(s) to localStorage
 
@@ -86,7 +87,7 @@ fetch("http://localhost:3000/api/cameras")
                         actualAmount,
                         selector.value
                     )
-                    
+
                     // Define a base state to check if the item already exists
 
                     let alreadyExist = false
@@ -120,11 +121,12 @@ fetch("http://localhost:3000/api/cameras")
                         alert("Nothing to add")
                     }
 
+
                     // Reset amount selected to zero and chang its view
                     actualAmount = 0
                     newAmount.innerHTML = actualAmount
+                    refreshCartIcon()
                 })
-                
 
             }
         }

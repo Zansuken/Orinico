@@ -21,7 +21,7 @@ localStorage.getItem('order')
 
 // Define globally the total amount in charge for the client
 
-let totalToPay = 0 
+let totalToPay = 0
 
 
 // Define a type class for the items in the localStorage
@@ -50,5 +50,50 @@ function removeFromBasket() {
             console.log('say Hello');
             document.getElementById(checkId).remove()
         }
+    }
+}
+
+// Function to refresh cart icon
+
+const totalItemsInCartView = document.createElement('span')
+totalItemsInCartView.setAttribute('id', 'number_of_item_in_cart')
+document.querySelector('#cartButton').appendChild(totalItemsInCartView)
+function refreshCartIcon() {
+    if (basket == 0) {
+        totalItemsInCartView.style.display = "none"
+    } else {
+        totalItemsInCartView.style.display = "inline"
+        let quantity = 0
+        for (const item of basket) {
+            quantity = quantity + item.quantity
+            console.log(quantity);
+            totalItemsInCartView.textContent = quantity
+        }
+
+    }
+
+
+}
+refreshCartIcon()
+
+// Check if basket is empty
+
+function checkIfBasketEmpty() {
+    if (basket.length == 0) {
+        const newDiv = document.createElement('div')
+        const cartView = document.querySelector('.cart_list')
+        const cartPreview = document.querySelector('#cart_preview')
+
+        cartList.remove()
+        cartPreview.style.display = "none"
+
+
+        newDiv.innerHTML = `
+        <div id="empty_cart">
+            <h2>There was nothing in your cart :(...</h2>
+            <a href="index.html">Go back to shopping!</a>
+        </div>
+        `
+        cartView.append(newDiv)
     }
 }
