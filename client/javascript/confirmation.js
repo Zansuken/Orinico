@@ -1,6 +1,6 @@
 const formLayout = document.querySelector('aside')
 
-fetch("http://localhost:3000/api/cameras")
+fetch("https://lit-ridge-00814.herokuapp.com/api/cameras")
     .then(response => response.json())
     .then(async function (value) {
 
@@ -122,19 +122,19 @@ orderBtn.addEventListener('click', (e) => {
     for (const product of basket) {
         products.push(product.id)
     }
-    
+
     console.log(contact.email);
 
     if (
         (singleWordRegex.test(contact.firstName) == true) &&
         (singleWordRegex.test(contact.lastName) == true) &&
         (spacedWordRegex.test(contact.address) == true) &&
-        (singleWordRegex.test(contact.city) == true) && 
+        (singleWordRegex.test(contact.city) == true) &&
         (contact.email.length > 0)
 
     ) {
 
-        fetch("http://localhost:3000/api/cameras/order", {
+        fetch("https://lit-ridge-00814.herokuapp.com/api/cameras/order", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -164,21 +164,21 @@ orderBtn.addEventListener('click', (e) => {
     } else {
 
         // Add an error message on any invalid input from user
-        
+
         if (singleWordRegex.test(contact.firstName) == false) {
-            document.querySelector('#error_firstname').innerHTML ='3 to 12 characters, letters only'
+            document.querySelector('#error_firstname').innerHTML = '3 to 12 characters, letters only'
         }
         if (singleWordRegex.test(contact.lastName) == false) {
-            document.querySelector('#error_lastname').innerHTML ='3 to 12 characters, letters only'
+            document.querySelector('#error_lastname').innerHTML = '3 to 12 characters, letters only'
         }
         if (spacedWordRegex.test(contact.address) == false) {
-            document.querySelector('#error_address').innerHTML ='Valid address only'
+            document.querySelector('#error_address').innerHTML = 'Valid address only'
         }
         if (singleWordRegex.test(contact.firstName) == false) {
-            document.querySelector('#error_city').innerHTML ='Valid city only'
+            document.querySelector('#error_city').innerHTML = 'Valid city only'
         }
         if (contact.email.length > 0) {
-            document.querySelector('#error_email').innerHTML ='Is not an email address'
+            document.querySelector('#error_email').innerHTML = 'Is not an email address'
         }
         console.log('Informations are not valid');
     }

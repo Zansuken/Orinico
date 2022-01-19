@@ -1,24 +1,24 @@
 // Home page
 
-fetch("http://localhost:3000/api/cameras")
-.then(response => response.json())
-.then(async function(value) {
-    
-    // Get the tag where new view will appear
+fetch("https://lit-ridge-00814.herokuapp.com/api/cameras")
+    .then(response => response.json())
+    .then(async function (value) {
 
-    const layout = document.querySelector("article");
-    
-    // Loop inside datas of api/cameras
+        // Get the tag where new view will appear
 
-    for (const card of value) {
+        const layout = document.querySelector("article");
 
-        const newDiv = document.createElement('div')
-        let itemPrice = convertPrice(`${card.price}`);
-        let itemProductPage = card._id
+        // Loop inside datas of api/cameras
 
-        // Define the content of the home page view
+        for (const card of value) {
 
-        newDiv.innerHTML = `
+            const newDiv = document.createElement('div')
+            let itemPrice = convertPrice(`${card.price}`);
+            let itemProductPage = card._id
+
+            // Define the content of the home page view
+
+            newDiv.innerHTML = `
         <div class="card">
             <a href="/client/products.html?_id=${itemProductPage}">
                 <img src="${card.imageUrl}" alt="camera">
@@ -32,12 +32,12 @@ fetch("http://localhost:3000/api/cameras")
             </a>
         </div>
         `
-        // Add the new view to the page
-        
-        layout.append(newDiv)
-    }
+            // Add the new view to the page
 
-})
-.catch(function(err) {
-    return err
-})
+            layout.append(newDiv)
+        }
+
+    })
+    .catch(function (err) {
+        return err
+    })

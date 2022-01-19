@@ -4,7 +4,7 @@
 
 let actualAmount = 0
 
-fetch("http://localhost:3000/api/cameras")
+fetch("https://lit-ridge-00814.herokuapp.com/api/cameras")
     .then(response => response.json())
     .then(async function (value) {
 
@@ -66,7 +66,7 @@ fetch("http://localhost:3000/api/cameras")
                     newAmount.innerHTML = actualAmount
                 })
 
-                
+
                 // Add selected item(s) to localStorage
 
                 addToCartBtn.addEventListener("click", (e) => {
