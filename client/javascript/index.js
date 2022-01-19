@@ -20,7 +20,7 @@ fetch("https://lit-ridge-00814.herokuapp.com/api/cameras")
 
             newDiv.innerHTML = `
         <div class="card">
-            <a href="/client/products.html?_id=${itemProductPage}">
+            <a href="/products.html?_id=${itemProductPage}">
                 <img src="${card.imageUrl}" alt="camera">
                 <div class="details">
                     <div class="description_head">
